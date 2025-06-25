@@ -71,3 +71,22 @@ with open('jobs.csv','w')as file:
             price='N/A'
         writer.writerow([title,desc,link,price])
 print("Done")
+#-------------------------------------------------------------WhatsApp integration with Twilio--------------------------------------
+import os
+from twilio.rest import Client
+
+# Load environment variables
+account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+
+# Twilio client setup
+client = Client(account_sid, auth_token)
+
+message = client.messages.create(
+    from_='whatsapp:+1XXXXXXXX  ',  # Twilio sandbox number
+    body='🚀 New Job Alert: Web Scraping Project is live!',
+    to='whatsapp:+92XXXXXXXXXX'     # Your personal number (with country code)
+)
+
+print("✅ Message sent:", message.sid)
+

@@ -46,6 +46,11 @@ except:
     print("❌ Cookie accept button not found or not clickable.")
 
 time.sleep(5)
+
+import os
+
+folder_path = os.path.dirname(os.path.abspath(__file__))  # Get current file's directory
+csv_path = os.path.join(folder_path, "jobs.csv")
 #-----------------------------------------------------------File-Handling-----------------------------------------
 
 
@@ -58,7 +63,7 @@ with open('jobs.csv','w')as file:
             title=post.find_element(By.XPATH,".//h6").text
             desc=post.find_element(By.XPATH,".//p[2]").text
             link=post.find_element(By.XPATH,'.//h6/a').get_attribute('href')
-            price=driver.find_element(By.XPATH,".//span[contains(@class, 'title-nano')]").text
+            price=post.find_element(By.XPATH,".//span[contains(@class, 'title-nano')]").text
         except:
             title='N/A'
             desc='N/A'
